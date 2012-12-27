@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+    <!-- Project information -->
+    <name>KrsmesPlotsPlugin</name>
+    <groupId>net.krsmes.bukkit</groupId>
+    <artifactId>krsmesPlots</artifactId>
+    <packaging>jar</packaging>
+
+    <url>https://github.com/krsmes/KrsmesPlots</url>
+    <version>0.1-SNAPSHOT</version>
+
+    <description>KrsmesPlots is a plots plugin for Bukkit-based servers to support protection of plots of land.</description>
+
+
+    <!-- Build properties -->
+    <properties>
+        <author>krsmes</author>
+    </properties>
+
+
+    <!-- Source code access -->
+    <scm>
+        <developerConnection>scm:git:git@github.com:krsmes/KrsmesPlots.git</developerConnection>
+        <connection>scm:git:git://github.com/krsmes/KrsmesPlots.git</connection>
+        <url>https://github.com/krsmes/KrsmesPlots</url>
+    </scm>
+
+
+    <!-- Dependency repositories -->
+    <repositories>
+        <!-- specify where to find bukkit artifacts -->
+        <repository>
+            <id>repobo-snap</id>
+            <name>repo.bukkit.org Snapshots</name>
+            <url>http://repo.bukkit.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>repobo-rel</id>
+            <name>repo.bukkit.org Releases</name>
+            <url>http://repo.bukkit.org/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+
+    <!-- Project dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>[1.4-R0-SNAPSHOT,)</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>craftbukkit</artifactId>
+			<version>[1.4-R0-SNAPSHOT,)</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>[2.0.5,)</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+
+
+	<build>
+        <!-- Static resource filtering -->
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>*.yml</include>
+                </includes>
+            </resource>
+        </resources>
+
+		<plugins>
+
+            <!-- Compile Java code -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+            <!-- buildNumber incrementer -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>true</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <format>${project.version}-r{0,number}</format>
+                    <items>
+                        <item>buildNumber</item>
+                    </items>
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>

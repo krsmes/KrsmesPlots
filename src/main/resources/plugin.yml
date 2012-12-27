@@ -1,0 +1,20 @@
+name: ${project.name}
+version: ${buildNumber}
+description: ${project.description}
+author: ${author}
+website: ${project.url}
+
+main: net.krsmes.bukkit.plugins.plots.KrsmesPlotsPlugin
+
+commands:
+    plots:
+        aliases: [plot]
+        description: Run a plot command.
+        #permission: krsmesPlots.plugin.command
+        usage: |
+            Usage: /<command> COMMAND
+
+permissions:
+    krsmesPlots.plugin.command:
+        description: Allow player to run plots command
+        default: false
